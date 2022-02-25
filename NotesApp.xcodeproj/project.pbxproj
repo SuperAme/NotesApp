@@ -13,6 +13,8 @@
 		9C89B15D27C99550009D9A64 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C89B15B27C99550009D9A64 /* Main.storyboard */; };
 		9C89B15F27C99552009D9A64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C89B15E27C99552009D9A64 /* Assets.xcassets */; };
 		9C89B16227C99552009D9A64 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C89B16027C99552009D9A64 /* LaunchScreen.storyboard */; };
+		9C89B16A27C997E6009D9A64 /* ListNoteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C89B16927C997E6009D9A64 /* ListNoteTableViewController.swift */; };
+		9C89B16C27C9984A009D9A64 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C89B16B27C9984A009D9A64 /* NotesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		9C89B15E27C99552009D9A64 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9C89B16127C99552009D9A64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9C89B16327C99552009D9A64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9C89B16927C997E6009D9A64 /* ListNoteTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListNoteTableViewController.swift; sourceTree = "<group>"; };
+		9C89B16B27C9984A009D9A64 /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,13 +62,23 @@
 			children = (
 				9C89B15527C99550009D9A64 /* AppDelegate.swift */,
 				9C89B15727C99550009D9A64 /* SceneDelegate.swift */,
-				9C89B15927C99550009D9A64 /* MainTableViewController.swift */,
+				9C89B16D27C998F7009D9A64 /* Controllers */,
 				9C89B15B27C99550009D9A64 /* Main.storyboard */,
 				9C89B15E27C99552009D9A64 /* Assets.xcassets */,
 				9C89B16027C99552009D9A64 /* LaunchScreen.storyboard */,
 				9C89B16327C99552009D9A64 /* Info.plist */,
 			);
 			path = NotesApp;
+			sourceTree = "<group>";
+		};
+		9C89B16D27C998F7009D9A64 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9C89B15927C99550009D9A64 /* MainTableViewController.swift */,
+				9C89B16927C997E6009D9A64 /* ListNoteTableViewController.swift */,
+				9C89B16B27C9984A009D9A64 /* NotesViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,6 +153,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C89B15A27C99550009D9A64 /* MainTableViewController.swift in Sources */,
+				9C89B16C27C9984A009D9A64 /* NotesViewController.swift in Sources */,
+				9C89B16A27C997E6009D9A64 /* ListNoteTableViewController.swift in Sources */,
 				9C89B15627C99550009D9A64 /* AppDelegate.swift in Sources */,
 				9C89B15827C99550009D9A64 /* SceneDelegate.swift in Sources */,
 			);
