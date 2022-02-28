@@ -35,7 +35,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Notes Categories" id="p3B-9t-RmX">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Kul-ei-feN"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Kul-ei-feN">
+                            <connections>
+                                <action selector="addButtonPressed:" destination="COy-9g-wCc" id="KYo-vq-CRd"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="mainTableView" destination="c8F-V7-SLX" id="9hp-pO-bEe"/>
