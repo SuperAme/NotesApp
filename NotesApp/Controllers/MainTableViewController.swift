@@ -6,17 +6,40 @@
 //
 
 import UIKit
+import CoreData
 
 class MainTableViewController: UITableViewController {
 
     private let manager = CoreDataStack()
     @IBOutlet var mainTableView: UITableView!
     
-    var categoryNotes = ["Category Note one","Category Note two","Category Note three","Category Note Four"]
+    var categoryNotes = [Category]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.mainTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        loadCategories()
+    }
+    
+    func saveCategory() {
+        do {
+            try manager.context.save()
+        } catch {
+            print("Error saving category \(error)")
+        }
+        tableView.reloadData()
+    }
+    
+    func loadCategories() {
+        let request: NSFetchRequest<Category> = Category.fetchRequest()
+        
+        do {
+            categoryNotes = try manager.context.fetch(request)
+        } catch {
+            print("Error Loading Categories - \(error)")
+        }
+        
+        tableView.reloadData()
     }
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
@@ -25,7 +48,10 @@ class MainTableViewController: UITableViewController {
         let alert = UIAlertController(title: "Add new category", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "Add", style: .default) { (action) in
             if let categoryTitle = textField.text {
-                self.manager.saveCategory(with: categoryTitle)
+                let newCategory = Category(context: self.manager.context)
+                newCategory.name = categoryTitle
+                self.categoryNotes.append(newCategory)
+                self.saveCategory()
 //                print(categoryTitle)
             }
         }
@@ -44,7 +70,7 @@ class MainTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = categoryNotes[indexPath.row]
+        cell.textLabel?.text = categoryNotes[indexPath.row].name
         return cell
     }
 

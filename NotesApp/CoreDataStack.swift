@@ -26,17 +26,4 @@ class CoreDataStack {
     var context: NSManagedObjectContext {
         return Self.persistentContainer.viewContext
     }
-    
-    func saveCategory(with name: String) {
-        let context = context
-        
-        let category = Category(context: context)
-        category.name = name
-        
-        do {
-            try context.save()
-        } catch {
-            print("Error saving category \(error)")
-        }
-    }
 }
