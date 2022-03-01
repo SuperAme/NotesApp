@@ -42,6 +42,13 @@ class MainTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    func deleteCategory(at index: Int) {
+        manager.context.delete(categoryNotes[index])
+        categoryNotes.remove(at: index)
+        
+        saveCategory()
+    }
+    
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         var textField = UITextField()
         
@@ -77,6 +84,12 @@ class MainTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let vc = storyboard?.instantiateViewController(withIdentifier: "NoteList") else { return }
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            deleteCategory(at: indexPath.row)
+        }
     }
 
 }
