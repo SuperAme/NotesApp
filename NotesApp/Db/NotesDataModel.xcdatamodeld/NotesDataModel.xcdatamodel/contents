@@ -4,13 +4,13 @@
         <attribute name="name" attributeType="String"/>
         <relationship name="notes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Note" inverseName="parentCategory" inverseEntity="Note"/>
     </entity>
-    <entity name="Note" representedClassName="Note" syncable="YES">
+    <entity name="Note" representedClassName=".Note" syncable="YES">
         <attribute name="descriptionText" attributeType="String"/>
         <attribute name="title" attributeType="String"/>
         <relationship name="parentCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="notes" inverseEntity="Category"/>
     </entity>
     <elements>
         <element name="Category" positionX="-387" positionY="9.31640625" width="128" height="73"/>
-        <element name="Note" positionX="-54" positionY="0" width="128" height="88"/>
+        <element name="Note" positionX="-54" positionY="0" width="128" height="74"/>
     </elements>
 </model>

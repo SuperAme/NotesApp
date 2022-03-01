@@ -10,6 +10,10 @@ import UIKit
 
 class NotesViewController: UIViewController {
     
+    let manager = CoreDataStack()
+    
+    var category: Category?
+    
     @IBOutlet weak var descriptionNoteTextField: UITextView!
     @IBOutlet weak var titleTextField: UITextField!
     
@@ -17,6 +21,23 @@ class NotesViewController: UIViewController {
         super.viewDidLoad()
         
     }
-    @IBAction func onSaveButtonPressed(_ sender: UIBarButtonItem) {
+    
+    @IBAction func onSaveButton(_ sender: UIBarButtonItem) {
+        if let titleTf = titleTextField.text, let descr = descriptionNoteTextField.text {
+            let newNote = Note(context: manager.context)
+            newNote.title = titleTf
+            newNote.descriptionText = descr
+            newNote.parentCategory = self.category
+            
+            saveNote()
+        }
+    }
+    
+    func saveNote() {
+        do {
+            try manager.context.save()
+        } catch  {
+            print("Error saving context \(error)")
+        }
     }
 }

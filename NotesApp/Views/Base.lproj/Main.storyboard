@@ -25,7 +25,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="UPD-fy-bQc" kind="show" id="FXR-aP-Nds"/>
+                                    <segue destination="UPD-fy-bQc" kind="show" identifier="NoteListSegue" id="FXR-aP-Nds"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -75,18 +75,18 @@
                     <navigationItem key="navigationItem" title="Notes" id="3Sh-MB-HgU">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="SeM-Hv-YJE">
                             <connections>
-                                <action selector="onAddButtonPressed:" destination="UPD-fy-bQc" id="hxW-zV-iHE"/>
-                                <segue destination="ven-Du-3Qy" kind="show" id="oNn-zH-CST"/>
+                                <action selector="onAddBtnPressed:" destination="UPD-fy-bQc" id="GLs-fI-Ele"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="listNotesTableView" destination="6Xg-vH-i8A" id="TNe-QQ-5c8"/>
+                        <segue destination="ven-Du-3Qy" kind="show" identifier="goToNotes" id="wyq-9q-J4D"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PVQ-p4-glc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1520" y="153"/>
+            <point key="canvasLocation" x="1619" y="160"/>
         </scene>
         <!--Note-->
         <scene sceneID="aAR-ko-aN4">
@@ -130,7 +130,7 @@
                     <navigationItem key="navigationItem" title="Note" id="aGE-WQ-bqP">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="cKk-EP-XsC">
                             <connections>
-                                <action selector="onSaveButtonPressed:" destination="ven-Du-3Qy" id="vFF-Mn-POZ"/>
+                                <action selector="onSaveButton:" destination="ven-Du-3Qy" id="DWW-7h-jRI"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

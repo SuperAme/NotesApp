@@ -10,13 +10,29 @@ import UIKit
 
 class ListNoteTableViewController: UITableViewController {
     
+    let manager = CoreDataStack()
+    
     var notes = ["Note one","Note two","Note three","Note Four"]
+    var selectedCategory: Category? {
+        didSet {
+//            loadNotes()
+            //            print(selectedCategory)
+        }
+    }
+    
     @IBOutlet var listNotesTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         listNotesTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
-    @IBAction func onAddButtonPressed(_ sender: UIBarButtonItem) {
+    
+    @IBAction func onAddBtnPressed(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "goToNotes", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! NotesViewController
+        destinationVC.category = selectedCategory
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
