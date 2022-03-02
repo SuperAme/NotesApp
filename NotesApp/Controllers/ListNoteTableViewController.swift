@@ -29,7 +29,8 @@ class ListNoteTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
+        loadNotes()
+        self.tableView.reloadData()
     }
     
     func loadNotes() {
@@ -72,8 +73,9 @@ class ListNoteTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = notesArray[indexPath.row].descriptionText
+        let cell = tableView.dequeueReusableCell(withIdentifier: "notesCell", for: indexPath)
+        cell.detailTextLabel?.text = notesArray[indexPath.row].descriptionText
+        cell.textLabel?.text = notesArray[indexPath.row].title
         return cell
     }
     

@@ -31,6 +31,7 @@ class NotesViewController: UIViewController {
             
             saveNote()
         }
+        self.navigationController?.popViewController(animated: true)
     }
     
     func saveNote() {
