@@ -16,7 +16,7 @@ class ListNoteTableViewController: UITableViewController {
     
     var selectedCategory: Category? {
         didSet {
-            loadNotes()
+            notesArray = manager.loadNotes(with: selectedCategory!.name!)
         }
     }
     
@@ -29,33 +29,15 @@ class ListNoteTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadNotes()
+        notesArray = manager.loadNotes(with: selectedCategory!.name!)
         self.tableView.reloadData()
-    }
-    
-    func loadNotes() {
-        let request: NSFetchRequest<Note> = Note.fetchRequest()
-        let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
-        
-        request.predicate = categoryPredicate
-        
-        do {
-            notesArray = try manager.context.fetch(request)
-        } catch {
-            print("Error fetching notes \(error.localizedDescription)")
-        }
     }
     
     func deleteNotes(at index: Int) {
         manager.context.delete(notesArray[index])
         notesArray.remove(at: index)
         
-        do {
-            try manager.context.save()
-        } catch {
-            print(error.localizedDescription)
-        }
-        
+        manager.saveData()
         tableView.reloadData()
     }
     

@@ -21,32 +21,19 @@ class MainTableViewController: UITableViewController {
         loadCategories()
     }
     
-    func saveCategory() {
-        do {
-            try manager.context.save()
-        } catch {
-            print("Error saving category \(error)")
-        }
-        tableView.reloadData()
-    }
-    
     func loadCategories() {
-        let request: NSFetchRequest<Category> = Category.fetchRequest()
-        
         do {
-            categoryNotes = try manager.context.fetch(request)
+            categoryNotes = try manager.loadCategories()
         } catch {
             print("Error Loading Categories - \(error)")
         }
-        
-        tableView.reloadData()
     }
     
     func deleteCategory(at index: Int) {
         manager.context.delete(categoryNotes[index])
         categoryNotes.remove(at: index)
-        
-        saveCategory()
+        manager.saveData()
+        tableView.reloadData()
     }
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
@@ -58,8 +45,9 @@ class MainTableViewController: UITableViewController {
                 let newCategory = Category(context: self.manager.context)
                 newCategory.name = categoryTitle
                 self.categoryNotes.append(newCategory)
-                self.saveCategory()
-//                print(categoryTitle)
+                
+                self.manager.saveData()
+                self.tableView.reloadData()
             }
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
