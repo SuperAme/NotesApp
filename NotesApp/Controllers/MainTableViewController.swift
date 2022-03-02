@@ -62,7 +62,11 @@ class MainTableViewController: UITableViewController {
 //                print(categoryTitle)
             }
         }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
         alert.addAction(action)
+        alert.addAction(cancelAction)
+        
         alert.addTextField { (field) in
             textField = field
             textField.placeholder = "Add new category"

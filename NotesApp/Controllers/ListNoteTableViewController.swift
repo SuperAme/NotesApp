@@ -17,7 +17,6 @@ class ListNoteTableViewController: UITableViewController {
     var selectedCategory: Category? {
         didSet {
             loadNotes()
-            //            print(selectedCategory)
         }
     }
     
@@ -25,17 +24,15 @@ class ListNoteTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("listNotesviewWillDidLoad")
         listNotesTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
-        print("listNotesviewWillAppear")
     }
     
-    public func loadNotes() {
+    func loadNotes() {
         let request: NSFetchRequest<Note> = Note.fetchRequest()
         let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
         
@@ -46,6 +43,19 @@ class ListNoteTableViewController: UITableViewController {
         } catch {
             print("Error fetching notes \(error.localizedDescription)")
         }
+    }
+    
+    func deleteNotes(at index: Int) {
+        manager.context.delete(notesArray[index])
+        notesArray.remove(at: index)
+        
+        do {
+            try manager.context.save()
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        tableView.reloadData()
     }
     
     @IBAction func onAddBtnPressed(_ sender: UIBarButtonItem) {
@@ -65,5 +75,11 @@ class ListNoteTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = notesArray[indexPath.row].descriptionText
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            deleteNotes(at: indexPath.row)
+        }
     }
 }
